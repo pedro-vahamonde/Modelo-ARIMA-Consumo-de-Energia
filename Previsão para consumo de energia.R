@@ -282,6 +282,42 @@ y<-forecast(Arima.industrial,13)
          ylab = 'Consumo de energia (GWh)')
    
  
+  ###############################
+  ### transformando em tabela ###
+  ############################### 
+   
+   v2 <- as.data.frame(v) %>%
+         rename("Consumo.total"= "Point Forecast") %>%
+         select(Consumo.total)
+  
+   y2 <- as.data.frame(y) %>%
+     rename("Consumo.industrial"= "Point Forecast") %>%
+     select(Consumo.industrial)
+   
+   z2 <- as.data.frame(z) %>%
+     rename("Consumo.comercio"= "Point Forecast") %>%
+     select(Consumo.comercio)
+   
+   w2 <- as.data.frame(w) %>%
+     rename("Consumo.residencial"= "Point Forecast") %>%
+     select(Consumo.residencial)
+   
+   x2 <- as.data.frame(x) %>%
+     rename("Consumo.outros"= "Point Forecast") %>%
+     select(Consumo.outros)
+   
+   Data <- seq.Date(from = as.Date("2022/12/01"),
+                    to = as.Date("2023/12/01"),
+                    by = "month")
+                    
+   
+   data <- data.frame(Data,v2,y2,z2,w2,x2) 
+    View(data)       
+   
+   ### Exportando pra Excel ###
+   write_xlsx(data,path = "C:/Users/Pedro/Documents/Processo-seletivo/Publicações do Linkedin/Previsão eletricidade/Modelo-ARIMA-Consumo-de-Energia/Tabela-previsão.xlsx")
+
+ 
    
    
    
